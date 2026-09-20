@@ -317,8 +317,8 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <span className="font-bold text-xl tracking-tighter">Bhavik.</span>
           <div className="flex gap-6 text-sm font-medium text-gray-400">
-            <Link href="#work" className="hover:text-white transition-colors">Work</Link>
             <Link href="#certs" className="hover:text-white transition-colors">Certificates</Link>
+            <Link href="#work" className="hover:text-white transition-colors">Websites</Link>
             <Link href="#about" className="hover:text-white transition-colors">About</Link>
           </div>
         </div>
@@ -366,46 +366,6 @@ export default function Portfolio() {
               </p>
             </div>
           </motion.div>
-        </section>
-
-        {/* Projects Showcase */}
-        <section id="work" className="py-24 border-t border-white/10">
-          <h2 className="text-3xl font-bold mb-12">Featured Websites</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative"
-              >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/20 group-hover:to-purple-500/20 rounded-2xl blur transition-all duration-500" />
-                <div className="relative h-full bg-[#111] border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-colors flex flex-col">
-                  
-                  <h3 className="text-2xl font-bold mb-3 flex items-center justify-between">
-                    {project.title}
-                    <a href={project.link} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors">
-                      <ExternalLink size={20} />
-                    </a>
-                  </h3>
-                  <p className="text-gray-400 mb-8 flex-grow">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.tags.map(tag => (
-                      <span key={tag} className="text-xs font-medium px-3 py-1 bg-white/5 rounded-full text-gray-300">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </section>
 
         {/* Certificates Section */}
@@ -472,6 +432,46 @@ export default function Portfolio() {
               ))}
             </div>
           </motion.div>
+        </section>
+
+        {/* Websites I Made */}
+        <section id="work" className="py-24 border-t border-white/10">
+          <h2 className="text-3xl font-bold mb-12">Websites I Made</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative"
+              >
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/20 group-hover:to-purple-500/20 rounded-2xl blur transition-all duration-500" />
+                <div className="relative h-full bg-[#111] border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-colors flex flex-col">
+                  
+                  <h3 className="text-2xl font-bold mb-3 flex items-center justify-between">
+                    {project.title}
+                    <a href={project.link} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors">
+                      <ExternalLink size={20} />
+                    </a>
+                  </h3>
+                  <p className="text-gray-400 mb-8 flex-grow">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="text-xs font-medium px-3 py-1 bg-white/5 rounded-full text-gray-300">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </section>
 
       </main>
