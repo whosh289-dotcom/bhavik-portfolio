@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bhavik-portfolio",
+  "compatibility_date": "2026-09-18",
+  "pages_build_output_dir": ".vercel/output/static",
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "portfolio-db",
+      "database_id": "7651530b-19ab-4908-ba5c-593fe43a14c8"
+    }
+  ]
+}
