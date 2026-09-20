@@ -11,9 +11,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    // In Cloudflare OpenNext/next-on-pages, bindings are exposed globally or via process.env
-    // We expect a D1 database binding named "DB"
-    const db = (process.env.DB || (globalThis as any).env?.DB) as any;
+    // We expect a D1 database binding named "data"
+    const db = (process.env.data || (globalThis as any).env?.data) as any;
 
     if (!db) {
       console.error("Database binding not found");
