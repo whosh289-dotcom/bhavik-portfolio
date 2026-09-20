@@ -365,7 +365,7 @@ export default function Portfolio() {
                 Hey, I&apos;m Bhavik. I&apos;m a student who spends practically all my free time designing, building, and deploying cool web-based tools and applications. 
               </p>
               <p>
-                From custom AI assistant interfaces to heavy-duty productivity dashboards, I love the entire process of front-end development. My focus is always on creating sleek, dark-themed, and highly responsive user experiences that get out of the way and let the functionality shine.
+                As a vibe coder and creator, I love turning concepts rapidly into live, polished software — from custom AI assistant interfaces to heavy-duty productivity dashboards. My focus is always on creating sleek, dark-themed, and highly responsive user experiences that get out of the way and let the functionality shine.
               </p>
             </div>
           </motion.div>
