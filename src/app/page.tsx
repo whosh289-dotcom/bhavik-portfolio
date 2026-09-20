@@ -292,7 +292,6 @@ export default function Portfolio() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [viewingCert, setViewingCert] = useState<typeof certificates[0] | null>(null);
-  const [showAllCerts, setShowAllCerts] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -315,8 +314,6 @@ export default function Portfolio() {
       setStatus("error");
     }
   };
-
-  const displayedCerts = showAllCerts ? certificates : certificates.slice(0, 6);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-100 font-sans selection:bg-blue-500/30">
@@ -429,63 +426,50 @@ export default function Portfolio() {
         </section>
 
         {/* Certificates Section */}
-        <section id="certs" className="py-24 border-t border-white/10">
+        <section id="certs" className="py-16 sm:py-24 border-t border-white/10">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex items-end justify-between mb-12">
-              <div>
-                <h2 className="text-3xl font-bold mb-4">Certificates & Credentials</h2>
-                <p className="text-gray-400 text-lg">{certificates.length} professional certificates from Google, IBM, and more. Click any card to view the real certificate.</p>
-              </div>
+            <div className="mb-6 sm:mb-10">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3">Certificates & Credentials</h2>
+              <p className="text-gray-400 text-sm sm:text-lg">{certificates.length} professional certificates. Tap any to view the real certificate.</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {displayedCerts.map((cert, index) => (
+            <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}>
+              {certificates.map((cert, index) => (
                 <motion.button
                   key={cert.title}
                   onClick={() => setViewingCert(cert)}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="group relative block text-left w-full"
+                  transition={{ duration: 0.3, delay: index * 0.02 }}
+                  className="group snap-start shrink-0 w-[160px] sm:w-[200px] md:w-[220px] text-left"
                 >
-                  <div className={`h-full bg-[#111] border rounded-xl p-6 transition-all duration-300 hover:border-white/20 ${
+                  <div className={`h-full bg-[#111] border rounded-xl p-3 sm:p-4 transition-all duration-300 hover:border-white/20 ${
                     cert.highlight ? "border-blue-500/30 hover:border-blue-500/50" : "border-white/10"
                   }`}>
-                    <div className="flex items-start justify-between mb-4">
-                      <div className={`p-2 rounded-lg ${cert.highlight ? "bg-blue-500/10" : "bg-white/5"}`}>
-                        {cert.highlight ? <Award size={20} className="text-blue-400" /> : <Shield size={20} className="text-gray-400" />}
+                    <div className="flex items-center justify-between mb-2 sm:mb-3">
+                      <div className={`p-1.5 sm:p-2 rounded-lg ${cert.highlight ? "bg-blue-500/10" : "bg-white/5"}`}>
+                        {cert.highlight ? <Award size={16} className="text-blue-400" /> : <Shield size={16} className="text-gray-400" />}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Eye size={14} className="text-gray-600 group-hover:text-blue-400 transition-colors" />
-                        <span className="text-xs text-gray-500">{cert.date}</span>
-                      </div>
+                      <Eye size={12} className="text-gray-600 group-hover:text-blue-400 transition-colors" />
                     </div>
-                    <h3 className="text-base font-semibold mb-2 group-hover:text-white transition-colors">{cert.title}</h3>
-                    <p className="text-sm text-gray-500">{cert.issuer}</p>
-                    {cert.courses && (
-                      <p className="text-xs text-blue-400/70 mt-3">{cert.courses} courses completed</p>
-                    )}
+                    <h3 className="text-xs sm:text-sm font-semibold mb-1 leading-tight group-hover:text-white transition-colors line-clamp-2">{cert.title}</h3>
+                    <p className="text-[10px] sm:text-xs text-gray-500 leading-tight line-clamp-1">{cert.issuer}</p>
+                    <div className="flex items-center justify-between mt-2">
+                      <span className="text-[10px] sm:text-xs text-gray-600">{cert.date}</span>
+                      {cert.courses && (
+                        <span className="text-[10px] text-blue-400/70">{cert.courses} courses</span>
+                      )}
+                    </div>
                   </div>
                 </motion.button>
               ))}
             </div>
-
-            {certificates.length > 6 && (
-              <div className="mt-8 text-center">
-                <button
-                  onClick={() => setShowAllCerts(!showAllCerts)}
-                  className="text-sm text-gray-400 hover:text-white border border-white/10 hover:border-white/20 px-6 py-3 rounded-full transition-colors"
-                >
-                  {showAllCerts ? "Show Less" : `Show All ${certificates.length} Certificates`}
-                </button>
-              </div>
-            )}
           </motion.div>
         </section>
 
