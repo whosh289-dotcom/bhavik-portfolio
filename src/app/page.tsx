@@ -24,18 +24,6 @@ const projects = [
     link: "https://rajesh-tv-repair.whosh289.workers.dev",
     tags: ["Business Website", "Cloudflare Workers", "SEO"],
   },
-  {
-    title: "AI Chat Assistant Interface",
-    description: "A sleek, custom web-based chat interface for interacting with language models.",
-    link: "#",
-    tags: ["WebSockets", "Next.js", "Framer Motion"],
-  },
-  {
-    title: "Student Tools Hub",
-    description: "A collection of web-based utilities and calculators built specifically for students.",
-    link: "#",
-    tags: ["TypeScript", "Tailwind CSS"],
-  }
 ];
 
 const certificates = [
