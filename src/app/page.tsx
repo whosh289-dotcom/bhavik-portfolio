@@ -13,12 +13,6 @@ const projects = [
     tags: ["Next.js", "React", "Tailwind CSS"],
   },
   {
-    title: "Brainy Syncro Work Flow",
-    description: "An advanced workflow synchronization tool designed for optimal team productivity.",
-    link: "https://brainy-syncro-work-flow.base44.app",
-    tags: ["React", "Node.js", "UI/UX"],
-  },
-  {
     title: "Rajesh LED LCD TV Repairing Services",
     description: "Built for a client — a full business website for a TV repair shop in Nagpur, featuring service listings, a photo gallery, live Google Reviews integration, and click-to-call functionality.",
     link: "https://rajesh-tv-repair.whosh289.workers.dev",
@@ -458,9 +452,9 @@ export default function Portfolio() {
           </motion.div>
         </section>
 
-        {/* Websites I Made */}
+        {/* Top 3 Websites I Made */}
         <section id="work" className="py-24 border-t border-white/10">
-          <h2 className="text-3xl font-bold mb-12">Websites I Made</h2>
+          <h2 className="text-3xl font-bold mb-12">Top 3 Websites I Made</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
