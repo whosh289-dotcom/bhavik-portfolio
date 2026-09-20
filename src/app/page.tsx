@@ -19,6 +19,12 @@ const projects = [
     tags: ["React", "Node.js", "UI/UX"],
   },
   {
+    title: "Rajesh LED LCD TV Repairing Services",
+    description: "A full business website built for a real TV repair shop in Nagpur — featuring service listings, a photo gallery, live Google Reviews integration, and click-to-call functionality.",
+    link: "https://rajesh-tv-repair.whosh289.workers.dev",
+    tags: ["Business Website", "Cloudflare Workers", "SEO"],
+  },
+  {
     title: "AI Chat Assistant Interface",
     description: "A sleek, custom web-based chat interface for interacting with language models.",
     link: "#",
