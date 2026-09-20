@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Mail, Twitter, Globe, ExternalLink } from "lucide-react";
+import { ArrowRight, Github, Mail, Twitter, Globe, ExternalLink, Award, Shield } from "lucide-react";
 import Link from "next/link";
 
 const projects = [
@@ -30,6 +30,63 @@ const projects = [
     link: "#",
     tags: ["TypeScript", "Tailwind CSS"],
   }
+];
+
+const certificates = [
+  {
+    title: "Google AI Professional Certificate",
+    issuer: "Google via Coursera",
+    date: "Apr 2026",
+    courses: 7,
+    verify: "https://coursera.org/verify/professional-cert/007XZW51DT9F",
+    highlight: true,
+  },
+  {
+    title: "Generative AI Leader Professional Certificate",
+    issuer: "Google Cloud via Coursera",
+    date: "Apr 2026",
+    courses: 5,
+    verify: "https://coursera.org/verify/professional-cert/18MVVW7HG8BU",
+    highlight: true,
+  },
+  {
+    title: "Google AI Essentials Professional Certificate",
+    issuer: "Google via Coursera",
+    date: "Apr 2026",
+    courses: 5,
+    verify: "https://coursera.org/verify/professional-cert/YETJM30S3FPC",
+    highlight: true,
+  },
+  {
+    title: "Cybersecurity Analyst Job Simulation",
+    issuer: "Tata via Forage",
+    date: "Apr 2026",
+    verify: "#",
+  },
+  {
+    title: "AI in Action Job Simulation",
+    issuer: "Forage",
+    date: "Apr 2026",
+    verify: "#",
+  },
+  {
+    title: "Generative AI: Prompt Engineering Basics",
+    issuer: "IBM via Coursera",
+    date: "Mar 2026",
+    verify: "https://coursera.org/verify/6J84YL5Q04F0",
+  },
+  {
+    title: "YUVA AI for ALL",
+    issuer: "IndiaAI via Coursera",
+    date: "Mar 2026",
+    verify: "https://coursera.org/verify/DYAGHFUKPZ0N",
+  },
+  {
+    title: "EF SET English Certificate — B2 Upper Intermediate",
+    issuer: "EF SET",
+    date: "Sep 2026",
+    verify: "https://cert.efset.org/UoT7C1",
+  },
 ];
 
 export default function Portfolio() {
@@ -67,6 +124,7 @@ export default function Portfolio() {
           <span className="font-bold text-xl tracking-tighter">Bhavik.</span>
           <div className="flex gap-6 text-sm font-medium text-gray-400">
             <Link href="#work" className="hover:text-white transition-colors">Work</Link>
+            <Link href="#certs" className="hover:text-white transition-colors">Certificates</Link>
             <Link href="#about" className="hover:text-white transition-colors">About</Link>
             <Link href="#contact" className="hover:text-white transition-colors">Contact</Link>
           </div>
@@ -162,6 +220,51 @@ export default function Portfolio() {
               </motion.div>
             ))}
           </div>
+        </section>
+
+        {/* Certificates Section */}
+        <section id="certs" className="py-24 border-t border-white/10">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl font-bold mb-4">Certificates & Credentials</h2>
+            <p className="text-gray-400 mb-12 text-lg">Professional certificates from Google, IBM, and more — earned through Coursera and other platforms.</p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {certificates.map((cert, index) => (
+                <motion.a
+                  key={cert.title}
+                  href={cert.verify}
+                  target="_blank"
+                  rel="noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className="group relative block"
+                >
+                  <div className={`h-full bg-[#111] border rounded-xl p-6 transition-all duration-300 hover:border-white/20 ${
+                    cert.highlight ? "border-blue-500/30 hover:border-blue-500/50" : "border-white/10"
+                  }`}>
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`p-2 rounded-lg ${cert.highlight ? "bg-blue-500/10" : "bg-white/5"}`}>
+                        {cert.highlight ? <Award size={20} className="text-blue-400" /> : <Shield size={20} className="text-gray-400" />}
+                      </div>
+                      <span className="text-xs text-gray-500">{cert.date}</span>
+                    </div>
+                    <h3 className="text-base font-semibold mb-2 group-hover:text-white transition-colors">{cert.title}</h3>
+                    <p className="text-sm text-gray-500">{cert.issuer}</p>
+                    {cert.courses && (
+                      <p className="text-xs text-blue-400/70 mt-3">{cert.courses} courses completed</p>
+                    )}
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
         </section>
 
         {/* Contact Section */}
