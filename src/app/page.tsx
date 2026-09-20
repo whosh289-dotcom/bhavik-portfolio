@@ -302,18 +302,12 @@ function CertViewer({ cert, onClose }: { cert: typeof certificates[0] | null; on
           </div>
 
           {/* PDF / Image Embed */}
-          <div className="flex-1 bg-[#1a1a1a] overflow-hidden relative">
-            {cert.pdf.endsWith(".png") ? (
-              <div className="flex items-center justify-center h-full p-4 sm:p-8">
-                <img src={cert.pdf} alt={cert.title} className="max-w-full max-h-full object-contain rounded-lg shadow-lg" />
-              </div>
-            ) : (
-              <iframe
-                src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=1&view=Fit`}
-                className="w-full h-full border-0 bg-white"
-                title={cert.title}
-              />
-            )}
+          <div className="flex-1 bg-[#141414] overflow-auto flex items-center justify-center p-4 sm:p-6">
+            <img 
+              src={cert.pdf.replace(/\.pdf$/, ".png")} 
+              alt={cert.title} 
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl bg-white" 
+            />
           </div>
         </motion.div>
       </motion.div>
@@ -417,17 +411,12 @@ export default function Portfolio() {
                       onClick={() => setViewingCert(cert)}
                       className="relative w-full h-[140px] sm:h-[160px] bg-[#0a0a0a] overflow-hidden cursor-pointer"
                     >
-                      {cert.pdf.endsWith(".png") ? (
-                        <img src={cert.pdf} alt={cert.title} className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 transition-opacity" />
-                      ) : (
-                        <iframe
-                          src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
-                          className="w-full h-[320px] border-0 pointer-events-none scale-[0.5] origin-top-left"
-                          style={{ width: "200%", height: "320px" }}
-                          title={cert.title}
-                          tabIndex={-1}
-                        />
-                      )}
+                      <img 
+                        src={cert.pdf.replace(/\.pdf$/, ".png")} 
+                        alt={cert.title} 
+                        className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity" 
+                        loading="lazy"
+                      />
                       {/* View Full Overlay */}
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center">
                         <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg">
