@@ -292,19 +292,13 @@ function CertViewer({ cert, onClose }: { cert: typeof certificates[0] | null; on
             </div>
           </div>
 
-          {/* PDF / Image Embed */}
-          <div className="flex-1 bg-white overflow-hidden relative">
-            {cert.pdf.endsWith(".png") ? (
-              <div className="flex items-center justify-center h-full p-4 sm:p-6 bg-[#141414]">
-                <img src={cert.pdf} alt={cert.title} className="max-w-full max-h-full object-contain rounded-lg shadow-2xl" />
-              </div>
-            ) : (
-              <iframe
-                src={cert.pdf}
-                className="w-full h-full border-0 bg-white"
-                title={cert.title}
-              />
-            )}
+          {/* Certificate Embed */}
+          <div className="flex-1 bg-[#141414] overflow-auto flex items-center justify-center p-3 sm:p-6">
+            <img 
+              src={cert.pdf.replace(/\.pdf$/, ".png")} 
+              alt={cert.title} 
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl bg-white select-none" 
+            />
           </div>
         </motion.div>
       </motion.div>
