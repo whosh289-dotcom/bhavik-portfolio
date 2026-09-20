@@ -441,19 +441,19 @@ export default function Portfolio() {
         </section>
 
         {/* Certificates Section */}
-        <section id="certs" className="py-16 sm:py-24 border-t border-white/10">
+        <section id="certs" className="py-12 sm:py-16 border-t border-white/10">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="mb-6 sm:mb-10">
+            <div className="mb-6 sm:mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold mb-3">Certificates & Credentials</h2>
-              <p className="text-gray-400 text-sm sm:text-lg">{certificates.length} professional certificates. Tap any to view the real certificate.</p>
+              <p className="text-gray-400 text-sm sm:text-lg">{certificates.length} professional certificates. Tap any to view full size.</p>
             </div>
             
-            <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}>
+            <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory" style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}>
               {certificates.map((cert, index) => (
                 <motion.button
                   key={cert.title}
@@ -462,24 +462,42 @@ export default function Portfolio() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: index * 0.02 }}
-                  className="group snap-start shrink-0 w-[160px] sm:w-[200px] md:w-[220px] text-left"
+                  className="group snap-start shrink-0 w-[180px] sm:w-[220px] md:w-[240px] text-left"
                 >
-                  <div className={`h-full bg-[#111] border rounded-xl p-3 sm:p-4 transition-all duration-300 hover:border-white/20 ${
+                  <div className={`h-full bg-[#111] border rounded-xl overflow-hidden transition-all duration-300 hover:border-white/20 ${
                     cert.highlight ? "border-blue-500/30 hover:border-blue-500/50" : "border-white/10"
                   }`}>
-                    <div className="flex items-center justify-between mb-2 sm:mb-3">
-                      <div className={`p-1.5 sm:p-2 rounded-lg ${cert.highlight ? "bg-blue-500/10" : "bg-white/5"}`}>
-                        {cert.highlight ? <Award size={16} className="text-blue-400" /> : <Shield size={16} className="text-gray-400" />}
-                      </div>
-                      <Eye size={12} className="text-gray-600 group-hover:text-blue-400 transition-colors" />
-                    </div>
-                    <h3 className="text-xs sm:text-sm font-semibold mb-1 leading-tight group-hover:text-white transition-colors line-clamp-2">{cert.title}</h3>
-                    <p className="text-[10px] sm:text-xs text-gray-500 leading-tight line-clamp-1">{cert.issuer}</p>
-                    <div className="flex items-center justify-between mt-2">
-                      <span className="text-[10px] sm:text-xs text-gray-600">{cert.date}</span>
-                      {cert.courses && (
-                        <span className="text-[10px] text-blue-400/70">{cert.courses} courses</span>
+                    {/* Certificate Preview Thumbnail */}
+                    <div className="relative w-full h-[120px] sm:h-[150px] bg-[#0a0a0a] overflow-hidden">
+                      {cert.pdf.endsWith(".png") ? (
+                        <img src={cert.pdf} alt={cert.title} className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity" />
+                      ) : (
+                        <iframe
+                          src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
+                          className="w-full h-[300px] border-0 pointer-events-none scale-[0.5] origin-top-left"
+                          style={{ width: "200%", height: "300px" }}
+                          title={cert.title}
+                          tabIndex={-1}
+                        />
                       )}
+                      {/* View Full Overlay */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1">
+                          <Eye size={12} /> View Full
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Card Info */}
+                    <div className="p-3 sm:p-4">
+                      <h3 className="text-xs sm:text-sm font-semibold mb-1 leading-tight line-clamp-2">{cert.title}</h3>
+                      <p className="text-[10px] sm:text-xs text-gray-500 line-clamp-1">{cert.issuer}</p>
+                      <div className="flex items-center justify-between mt-2">
+                        <span className="text-[10px] sm:text-xs text-gray-600">{cert.date}</span>
+                        {cert.courses && (
+                          <span className="text-[10px] text-blue-400/70">{cert.courses} courses</span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </motion.button>
