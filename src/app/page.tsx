@@ -255,37 +255,46 @@ function CertViewer({ cert, onClose }: { cert: typeof certificates[0] | null; on
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+        className="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] flex items-center justify-center p-3 sm:p-6"
         onClick={onClose}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="bg-[#111] border border-white/10 rounded-2xl w-full max-w-4xl h-[85vh] flex flex-col overflow-hidden"
+          className="bg-[#111] border border-white/15 rounded-2xl w-full max-w-5xl h-[88vh] flex flex-col overflow-hidden shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Modal Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
-            <div>
-              <h3 className="font-bold text-lg">{cert.title}</h3>
-              <p className="text-sm text-gray-500">{cert.issuer} · {cert.date}</p>
+          <div className="flex items-center justify-between px-5 py-3.5 border-b border-white/10 bg-[#141414]">
+            <div className="min-w-0 pr-4">
+              <h3 className="font-bold text-base sm:text-lg text-white truncate">{cert.title}</h3>
+              <p className="text-xs sm:text-sm text-gray-400 truncate">{cert.issuer} · {cert.date}</p>
             </div>
-            <div className="flex items-center gap-3">
-              {cert.verify !== "#" && (
+            <div className="flex items-center gap-2 shrink-0">
+              {cert.verify && cert.verify !== "#" && (
                 <a
                   href={cert.verify}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-xs bg-blue-500/10 text-blue-400 px-3 py-1.5 rounded-lg hover:bg-blue-500/20 transition-colors"
+                  className="text-xs bg-blue-500/15 text-blue-400 hover:bg-blue-500/25 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 font-medium"
                 >
-                  Verify ↗
+                  Verify <ExternalLink size={12} />
                 </a>
               )}
+              <a
+                href={cert.pdf}
+                target="_blank"
+                rel="noreferrer"
+                className="text-xs bg-white/10 text-gray-200 hover:text-white hover:bg-white/20 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 font-medium"
+              >
+                Open Original ↗
+              </a>
               <button
                 onClick={onClose}
-                className="p-2 hover:bg-white/10 rounded-lg transition-colors text-gray-400 hover:text-white"
+                className="p-1.5 hover:bg-white/10 rounded-lg transition-colors text-gray-400 hover:text-white ml-1"
+                aria-label="Close viewer"
               >
                 <X size={20} />
               </button>
@@ -293,15 +302,15 @@ function CertViewer({ cert, onClose }: { cert: typeof certificates[0] | null; on
           </div>
 
           {/* PDF / Image Embed */}
-          <div className="flex-1 bg-[#0a0a0a] overflow-auto">
+          <div className="flex-1 bg-[#1a1a1a] overflow-hidden relative">
             {cert.pdf.endsWith(".png") ? (
-              <div className="flex items-center justify-center h-full p-8">
-                <img src={cert.pdf} alt={cert.title} className="max-w-full max-h-full object-contain rounded-lg" />
+              <div className="flex items-center justify-center h-full p-4 sm:p-8">
+                <img src={cert.pdf} alt={cert.title} className="max-w-full max-h-full object-contain rounded-lg shadow-lg" />
               </div>
             ) : (
               <iframe
-                src={cert.pdf}
-                className="w-full h-full border-0"
+                src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=1&view=Fit`}
+                className="w-full h-full border-0 bg-white"
                 title={cert.title}
               />
             )}
