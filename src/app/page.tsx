@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Github, Mail, Twitter, ExternalLink, Award, Shield, X, Eye } from "lucide-react";
+import { ArrowRight, ExternalLink, Award, Shield, X, Eye } from "lucide-react";
 import Link from "next/link";
 
 const projects = [
@@ -304,31 +304,7 @@ function CertViewer({ cert, onClose }: { cert: typeof certificates[0] | null; on
 }
 
 export default function Portfolio() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [viewingCert, setViewingCert] = useState<typeof certificates[0] | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("submitting");
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (res.ok) {
-        setStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch (error) {
-      setStatus("error");
-    }
-  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-100 font-sans selection:bg-blue-500/30">
@@ -344,7 +320,6 @@ export default function Portfolio() {
             <Link href="#work" className="hover:text-white transition-colors">Work</Link>
             <Link href="#certs" className="hover:text-white transition-colors">Certificates</Link>
             <Link href="#about" className="hover:text-white transition-colors">About</Link>
-            <Link href="#contact" className="hover:text-white transition-colors">Contact</Link>
           </div>
         </div>
       </nav>
@@ -499,76 +474,6 @@ export default function Portfolio() {
           </motion.div>
         </section>
 
-        {/* Contact Section */}
-        <section id="contact" className="py-24 border-t border-white/10">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="max-w-2xl"
-          >
-            <h2 className="text-3xl font-bold mb-6">Let&apos;s Build Something.</h2>
-            <p className="text-gray-400 text-lg mb-10">
-              Always open to collaborating on new web projects. If you have an idea you want to turn into a live URL, let&apos;s talk.
-            </p>
-            
-            <form className="space-y-4 mb-12" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-2 gap-4">
-                <input 
-                  type="text" 
-                  placeholder="Name" 
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500/50 transition-colors w-full" 
-                />
-                <input 
-                  type="email" 
-                  placeholder="Email" 
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500/50 transition-colors w-full" 
-                />
-              </div>
-              <textarea 
-                placeholder="Your message..." 
-                rows={4} 
-                required
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500/50 transition-colors w-full resize-none" 
-              />
-              <button 
-                type="submit" 
-                disabled={status === "submitting"}
-                className="bg-white text-black px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors w-full disabled:opacity-50"
-              >
-                {status === "submitting" ? "Sending..." : "Send Message"}
-              </button>
-              
-              {status === "success" && (
-                <p className="text-green-500 mt-2 text-sm">Message sent successfully! I&apos;ll get back to you soon.</p>
-              )}
-              {status === "error" && (
-                <p className="text-red-500 mt-2 text-sm">Failed to send message. Please try again or reach out via email.</p>
-              )}
-            </form>
-
-            <div className="flex gap-6 text-gray-400">
-              <a href="https://github.com/whosh289-dotcom" target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2">
-                <Github size={20} /> GitHub
-              </a>
-              <a href="#" className="hover:text-white transition-colors flex items-center gap-2">
-                <Twitter size={20} /> Twitter
-              </a>
-              <a href="#" className="hover:text-white transition-colors flex items-center gap-2">
-                <Mail size={20} /> Email
-              </a>
-            </div>
-          </motion.div>
-        </section>
-        
       </main>
     </div>
   );
