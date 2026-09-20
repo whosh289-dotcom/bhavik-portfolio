@@ -24,6 +24,12 @@ const projects = [
     link: "https://rajesh-tv-repair.whosh289.workers.dev",
     tags: ["Business Website", "Cloudflare Workers", "SEO"],
   },
+  {
+    title: "Notes Maker — AI Study Notes",
+    description: "An AI-powered study note generator that turns rough notes into exam-ready sheets with derivations, trap detection, and previous year questions.",
+    link: "https://notes-maker.whosh289.workers.dev",
+    tags: ["AI", "Cloudflare Workers", "Education"],
+  },
 ];
 
 const certificates = [
