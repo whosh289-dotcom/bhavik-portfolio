@@ -52,6 +52,15 @@ const certificates = [
     highlight: true,
   },
   {
+    title: "Google AI Essentials Professional Certificate",
+    issuer: "Google via Coursera",
+    date: "Apr 2026",
+    courses: 5,
+    verify: "https://coursera.org/verify/professional-cert/YETJM30S3FPC",
+    pdf: "/certs/google-ai-professional.pdf",
+    highlight: true,
+  },
+  {
     title: "Cybersecurity Analyst Job Simulation",
     issuer: "Tata via Forage",
     date: "Apr 2026",
@@ -381,54 +390,80 @@ export default function Portfolio() {
               <p className="text-gray-400 text-sm sm:text-lg">{certificates.length} professional certificates. Tap any to view full size.</p>
             </div>
             
-            <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory" style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}>
+            <div className="flex gap-4 overflow-x-auto pb-6 -mx-6 px-6 snap-x snap-mandatory" style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}>
               {certificates.map((cert, index) => (
-                <motion.button
+                <motion.div
                   key={cert.title}
-                  onClick={() => setViewingCert(cert)}
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: index * 0.02 }}
-                  className="group snap-start shrink-0 w-[180px] sm:w-[220px] md:w-[240px] text-left"
+                  className="group snap-start shrink-0 w-[220px] sm:w-[260px] md:w-[280px] text-left flex flex-col"
                 >
-                  <div className={`h-full bg-[#111] border rounded-xl overflow-hidden transition-all duration-300 hover:border-white/20 ${
-                    cert.highlight ? "border-blue-500/30 hover:border-blue-500/50" : "border-white/10"
+                  <div className={`h-full bg-[#111] border rounded-2xl overflow-hidden transition-all duration-300 hover:border-white/30 flex flex-col ${
+                    cert.highlight ? "border-blue-500/40 hover:border-blue-500/70" : "border-white/10"
                   }`}>
-                    {/* Certificate Preview Thumbnail */}
-                    <div className="relative w-full h-[120px] sm:h-[150px] bg-[#0a0a0a] overflow-hidden">
+                    {/* Certificate Preview Thumbnail (Clickable to View Full) */}
+                    <div 
+                      onClick={() => setViewingCert(cert)}
+                      className="relative w-full h-[140px] sm:h-[160px] bg-[#0a0a0a] overflow-hidden cursor-pointer"
+                    >
                       {cert.pdf.endsWith(".png") ? (
-                        <img src={cert.pdf} alt={cert.title} className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity" />
+                        <img src={cert.pdf} alt={cert.title} className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 transition-opacity" />
                       ) : (
                         <iframe
                           src={`${cert.pdf}#toolbar=0&navpanes=0&scrollbar=0`}
-                          className="w-full h-[300px] border-0 pointer-events-none scale-[0.5] origin-top-left"
-                          style={{ width: "200%", height: "300px" }}
+                          className="w-full h-[320px] border-0 pointer-events-none scale-[0.5] origin-top-left"
+                          style={{ width: "200%", height: "320px" }}
                           title={cert.title}
                           tabIndex={-1}
                         />
                       )}
                       {/* View Full Overlay */}
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
-                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1">
-                          <Eye size={12} /> View Full
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-center justify-center">
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg">
+                          <Eye size={13} /> View Full
                         </span>
                       </div>
                     </div>
 
                     {/* Card Info */}
-                    <div className="p-3 sm:p-4">
-                      <h3 className="text-xs sm:text-sm font-semibold mb-1 leading-tight line-clamp-2">{cert.title}</h3>
-                      <p className="text-[10px] sm:text-xs text-gray-500 line-clamp-1">{cert.issuer}</p>
-                      <div className="flex items-center justify-between mt-2">
-                        <span className="text-[10px] sm:text-xs text-gray-600">{cert.date}</span>
-                        {cert.courses && (
-                          <span className="text-[10px] text-blue-400/70">{cert.courses} courses</span>
+                    <div className="p-4 flex flex-col flex-grow justify-between">
+                      <div>
+                        <div className="flex items-start justify-between gap-2 mb-1.5">
+                          <h3 className="text-sm sm:text-base font-semibold leading-snug line-clamp-2">{cert.title}</h3>
+                        </div>
+                        <p className="text-xs text-gray-400 line-clamp-1">{cert.issuer}</p>
+                        <div className="flex items-center justify-between mt-2 text-xs">
+                          <span className="text-gray-500">{cert.date}</span>
+                          {cert.courses && (
+                            <span className="text-blue-400/80 font-medium">{cert.courses} courses</span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Action Links */}
+                      <div className="flex items-center gap-2 mt-4 pt-3 border-t border-white/5">
+                        <button
+                          onClick={() => setViewingCert(cert)}
+                          className="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white transition-colors flex items-center justify-center gap-1.5"
+                        >
+                          <Eye size={12} /> View
+                        </button>
+                        {cert.verify && cert.verify !== "#" && (
+                          <a
+                            href={cert.verify}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex-1 py-1.5 px-3 rounded-lg text-xs font-medium bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 hover:text-blue-300 transition-colors flex items-center justify-center gap-1"
+                          >
+                            Verify <ExternalLink size={11} />
+                          </a>
                         )}
                       </div>
                     </div>
                   </div>
-                </motion.button>
+                </motion.div>
               ))}
             </div>
           </motion.div>
