@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Mail, Twitter, Globe, ExternalLink } from "lucide-react";
 import Link from "next/link";
@@ -32,6 +33,31 @@ const projects = [
 ];
 
 export default function Portfolio() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("submitting");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch (error) {
+      setStatus("error");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-100 font-sans selection:bg-blue-500/30">
       
@@ -151,15 +177,47 @@ export default function Portfolio() {
               Always open to collaborating on new web projects. If you have an idea you want to turn into a live URL, let's talk.
             </p>
             
-            <form className="space-y-4 mb-12" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-4 mb-12" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4">
-                <input type="text" placeholder="Name" className="bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500/50 transition-colors w-full" />
-                <input type="email" placeholder="Email" className="bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500/50 transition-colors w-full" />
+                <input 
+                  type="text" 
+                  placeholder="Name" 
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500/50 transition-colors w-full" 
+                />
+                <input 
+                  type="email" 
+                  placeholder="Email" 
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500/50 transition-colors w-full" 
+                />
               </div>
-              <textarea placeholder="Your message..." rows={4} className="bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500/50 transition-colors w-full resize-none" />
-              <button className="bg-white text-black px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors w-full">
-                Send Message
+              <textarea 
+                placeholder="Your message..." 
+                rows={4} 
+                required
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                className="bg-[#111] border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500/50 transition-colors w-full resize-none" 
+              />
+              <button 
+                type="submit" 
+                disabled={status === "submitting"}
+                className="bg-white text-black px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors w-full disabled:opacity-50"
+              >
+                {status === "submitting" ? "Sending..." : "Send Message"}
               </button>
+              
+              {status === "success" && (
+                <p className="text-green-500 mt-2 text-sm">Message sent successfully! I'll get back to you soon.</p>
+              )}
+              {status === "error" && (
+                <p className="text-red-500 mt-2 text-sm">Failed to send message. Please try again or reach out via email.</p>
+              )}
             </form>
 
             <div className="flex gap-6 text-gray-400">
