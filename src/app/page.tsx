@@ -219,6 +219,21 @@ const certificates = [
     pdf: "/certs/mix-and-move-with-ai.pdf",
     verify: "#",
   },
+  {
+    title: "AI Foundation Course",
+    issuer: "AI Foundation",
+    date: "2026",
+    pdf: "/certs/ai-foundation-course.pdf",
+    verify: "#",
+  },
+  {
+    title: "Google AI Professional Certificate Badge",
+    issuer: "Google via Credly",
+    date: "Apr 2026",
+    pdf: "/certs/google-ai-badge.pdf",
+    verify: "https://www.credly.com/go/pFfIyv9f",
+    highlight: true,
+  },
 ];
 
 // Certificate Viewer Modal
