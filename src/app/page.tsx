@@ -410,13 +410,6 @@ export default function Portfolio() {
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/20 group-hover:to-purple-500/20 rounded-2xl blur transition-all duration-500" />
                 <div className="relative h-full bg-[#111] border border-white/10 rounded-2xl p-8 hover:border-white/20 transition-colors flex flex-col">
                   
-                  {/* Browser Mockup Header */}
-                  <div className="flex gap-2 mb-6 pb-4 border-b border-white/5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/20" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/20" />
-                  </div>
-
                   <h3 className="text-2xl font-bold mb-3 flex items-center justify-between">
                     {project.title}
                     <a href={project.link} target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors">
