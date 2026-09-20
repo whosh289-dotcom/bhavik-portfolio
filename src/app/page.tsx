@@ -177,6 +177,48 @@ const certificates = [
     pdf: "/certs/google-intro-to-ai.pdf",
     verify: "https://coursera.org/verify/LDXYQIYORNOV",
   },
+  {
+    title: "AI Appreciate 2025",
+    issuer: "AI Appreciation Program",
+    date: "2025",
+    pdf: "/certs/ai-appreciate-2025.png",
+    verify: "#",
+  },
+  {
+    title: "AI Aware 2025",
+    issuer: "AI Awareness Program",
+    date: "2025",
+    pdf: "/certs/ai-aware-2025.png",
+    verify: "#",
+  },
+  {
+    title: "AI For All",
+    issuer: "AI For All Program",
+    date: "2025",
+    pdf: "/certs/ai-for-all.png",
+    verify: "#",
+  },
+  {
+    title: "AI For All — Advanced",
+    issuer: "AI For All Program",
+    date: "2025",
+    pdf: "/certs/ai-for-all-1.png",
+    verify: "#",
+  },
+  {
+    title: "AI for Oceans — Hour of Code",
+    issuer: "Code.org",
+    date: "2026",
+    pdf: "/certs/ai-for-oceans-hour-of-code.pdf",
+    verify: "#",
+  },
+  {
+    title: "Mix & Move with AI",
+    issuer: "AI Workshop",
+    date: "2026",
+    pdf: "/certs/mix-and-move-with-ai.pdf",
+    verify: "#",
+  },
 ];
 
 // Certificate Viewer Modal
@@ -226,13 +268,19 @@ function CertViewer({ cert, onClose }: { cert: typeof certificates[0] | null; on
             </div>
           </div>
 
-          {/* PDF Embed */}
-          <div className="flex-1 bg-[#0a0a0a]">
-            <iframe
-              src={cert.pdf}
-              className="w-full h-full border-0"
-              title={cert.title}
-            />
+          {/* PDF / Image Embed */}
+          <div className="flex-1 bg-[#0a0a0a] overflow-auto">
+            {cert.pdf.endsWith(".png") ? (
+              <div className="flex items-center justify-center h-full p-8">
+                <img src={cert.pdf} alt={cert.title} className="max-w-full max-h-full object-contain rounded-lg" />
+              </div>
+            ) : (
+              <iframe
+                src={cert.pdf}
+                className="w-full h-full border-0"
+                title={cert.title}
+              />
+            )}
           </div>
         </motion.div>
       </motion.div>
