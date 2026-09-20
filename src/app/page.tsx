@@ -20,7 +20,7 @@ const projects = [
   },
   {
     title: "Rajesh LED LCD TV Repairing Services",
-    description: "A full business website built for a real TV repair shop in Nagpur — featuring service listings, a photo gallery, live Google Reviews integration, and click-to-call functionality.",
+    description: "Built for a client — a full business website for a TV repair shop in Nagpur, featuring service listings, a photo gallery, live Google Reviews integration, and click-to-call functionality.",
     link: "https://rajesh-tv-repair.whosh289.workers.dev",
     tags: ["Business Website", "Cloudflare Workers", "SEO"],
   },
