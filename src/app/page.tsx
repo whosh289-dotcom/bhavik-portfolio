@@ -397,15 +397,15 @@ export default function Portfolio() {
                   <div className={`h-full bg-[#111] border rounded-2xl overflow-hidden transition-all duration-300 hover:border-white/30 flex flex-col ${
                     cert.highlight ? "border-blue-500/40 hover:border-blue-500/70" : "border-white/10"
                   }`}>
-                    {/* Certificate Preview Thumbnail (Clickable to View Full) */}
+                    {/* Certificate Preview Thumbnail (Clickable to View Full - Uncropped) */}
                     <div 
                       onClick={() => setViewingCert(cert)}
-                      className="relative w-full h-[140px] sm:h-[160px] bg-[#0a0a0a] overflow-hidden cursor-pointer"
+                      className="relative w-full aspect-[4/3] bg-[#080808] p-2.5 overflow-hidden cursor-pointer flex items-center justify-center border-b border-white/5"
                     >
                       <img 
                         src={cert.pdf.replace(/\.pdf$/, ".png")} 
                         alt={cert.title} 
-                        className="w-full h-full object-cover object-top opacity-90 group-hover:opacity-100 transition-opacity" 
+                        className="max-w-full max-h-full object-contain rounded shadow-sm opacity-95 group-hover:opacity-100 transition-opacity" 
                         loading="lazy"
                       />
                       {/* View Full Overlay */}
