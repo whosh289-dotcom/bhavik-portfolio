@@ -330,7 +330,7 @@ export default function Portfolio() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-blue-500 font-medium mb-4 tracking-wide uppercase text-sm">Student & Frontend Developer</h2>
+            <h2 className="text-blue-500 font-medium mb-4 tracking-wide uppercase text-sm">Student Developer</h2>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 leading-tight">
               I build visually striking <br className="hidden md:block"/> & functional websites.
             </h1>
