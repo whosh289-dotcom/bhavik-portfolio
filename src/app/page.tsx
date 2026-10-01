@@ -13,10 +13,10 @@ const projects = [
     tags: ["Next.js", "React", "Tailwind CSS"],
   },
   {
-    title: "Rajesh LED LCD TV Repairing Services",
-    description: "Built for a client — a full business website for a TV repair shop in Nagpur, featuring service listings, a photo gallery, live Google Reviews integration, and click-to-call functionality.",
-    link: "https://rajesh-tv-repair.whosh289.workers.dev",
-    tags: ["Business Website", "Cloudflare Workers", "SEO"],
+    title: "Cortex Band",
+    description: "Built for a client — a complete web solution featuring both frontend and backend architectures.",
+    link: "https://cortex-band-website.whosh289.workers.dev",
+    tags: ["Frontend", "Backend", "Client Project"],
   },
   {
     title: "Notes Maker — AI Study Notes",
