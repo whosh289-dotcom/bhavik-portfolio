@@ -503,20 +503,20 @@ export default function Portfolio() {
                   className="group relative"
                 >
                   <div className="absolute -inset-px bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/50 group-hover:to-purple-500/50 rounded-3xl blur-sm transition-all duration-500 opacity-0 group-hover:opacity-100" />
-                  <div className="relative h-full bg-[#111] border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all flex flex-col hover:bg-[#141414] overflow-hidden">
+                  <a href={project.link} target="_blank" rel="noreferrer" className="block relative h-full bg-[#111] border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all flex flex-col hover:bg-[#141414] overflow-hidden cursor-pointer">
                     {/* Decorative gradient orb */}
                     <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-colors" />
                     
                     <div className="flex justify-between items-start mb-6">
-                      <div className="p-3 bg-white/5 rounded-2xl border border-white/10 group-hover:bg-blue-500/10 group-hover:border-blue-500/20 group-hover:text-blue-400 transition-colors">
+                      <div className="p-3 bg-white/5 rounded-2xl border border-white/10 group-hover:bg-blue-500/10 group-hover:border-blue-500/20 group-hover:text-blue-400 transition-colors relative z-10">
                         <Award size={24} />
                       </div>
-                      <a href={project.link} target="_blank" rel="noreferrer" className="p-2 bg-white/5 rounded-full hover:bg-white/20 transition-colors text-gray-400 hover:text-white">
+                      <div className="p-2 bg-white/5 rounded-full hover:bg-white/20 transition-colors text-gray-400 group-hover:text-white relative z-10">
                         <ExternalLink size={20} />
-                      </a>
+                      </div>
                     </div>
                     
-                    <h3 className="text-2xl font-bold mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all">
+                    <h3 className="text-2xl font-bold mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all relative z-10">
                       {project.title}
                     </h3>
                     <p className="text-gray-400 mb-8 flex-grow text-lg leading-relaxed">
@@ -530,7 +530,7 @@ export default function Portfolio() {
                         </span>
                       ))}
                     </div>
-                  </div>
+                  </a>
                 </motion.div>
               ))}
             </div>
