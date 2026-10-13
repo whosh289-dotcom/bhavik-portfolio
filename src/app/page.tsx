@@ -3,8 +3,21 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ExternalLink, Award, X, Eye } from "lucide-react";
+import { ArrowRight, ExternalLink, Award, X, Eye, Phone, Github, Copy, Check } from "lucide-react";
 import Link from "next/link";
+
+function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.711 1.457h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  );
+}
 
 const projects = [
   {
@@ -301,6 +314,15 @@ function CertViewer({ cert, onClose }: { cert: typeof certificates[0] | null; on
 
 export default function Portfolio() {
   const [viewingCert, setViewingCert] = useState<typeof certificates[0] | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyNumber = () => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText("+91 9970135573");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-100 font-sans selection:bg-blue-500/30">
@@ -318,6 +340,7 @@ export default function Portfolio() {
             <Link href="#certs" className="hover:text-white transition-colors">Certificates</Link>
             <Link href="#work" className="hover:text-white transition-colors">Websites</Link>
             <Link href="#about" className="hover:text-white transition-colors">About</Link>
+            <Link href="#contact" className="hover:text-white transition-colors">Contact</Link>
           </div>
         </div>
       </nav>
@@ -533,6 +556,116 @@ export default function Portfolio() {
                   </a>
                 </motion.div>
               ))}
+            </div>
+          </motion.div>
+        </section>
+        
+        {/* Contact Section */}
+        <section id="contact" className="py-24 border-t border-white/10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="mb-12">
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">Get In Touch</h2>
+              <p className="text-gray-400 text-lg max-w-2xl">
+                Have a project in mind, want to collaborate, or have a question? Reach out directly — I&apos;m always open to discussing new web projects.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Featured WhatsApp Card */}
+              <div className="md:col-span-2 relative group">
+                <div className="absolute -inset-px bg-gradient-to-r from-emerald-500/20 to-green-500/20 group-hover:from-emerald-500/40 group-hover:to-green-500/40 rounded-3xl blur-sm transition-all duration-500 opacity-70 group-hover:opacity-100" />
+                <div className="relative h-full bg-[#111] border border-emerald-500/30 group-hover:border-emerald-500/60 rounded-3xl p-8 transition-all flex flex-col justify-between overflow-hidden">
+                  {/* Decorative background glow */}
+                  <div className="absolute -top-20 -right-20 w-44 h-44 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
+                  <div>
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-3">
+                        <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-emerald-400">
+                          <WhatsAppIcon className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <span className="text-xs uppercase tracking-wider text-emerald-400 font-semibold">Direct Chat</span>
+                          <h3 className="text-2xl font-bold text-white">WhatsApp</h3>
+                        </div>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        Fastest Response
+                      </span>
+                    </div>
+
+                    <p className="text-gray-300 text-lg mb-6">
+                      Message me directly on WhatsApp for quick inquiries, project discussions, or questions.
+                    </p>
+
+                    <div className="inline-flex items-center gap-3 bg-white/5 border border-white/10 px-4 py-2.5 rounded-xl font-mono text-base sm:text-lg text-white mb-6">
+                      <span>+91 9970135573</span>
+                      <button
+                        type="button"
+                        onClick={handleCopyNumber}
+                        className="p-1.5 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors"
+                        title="Copy phone number"
+                        aria-label="Copy phone number"
+                      >
+                        {copied ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
+                      </button>
+                      {copied && <span className="text-xs text-emerald-400 font-sans">Copied!</span>}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-white/5">
+                    <a
+                      href="https://wa.me/919970135573"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-6 py-3 rounded-full transition-all hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/20"
+                    >
+                      <WhatsAppIcon className="w-5 h-5" />
+                      Chat on WhatsApp
+                      <ExternalLink size={16} />
+                    </a>
+                    <a
+                      href="tel:+919970135573"
+                      className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white font-medium px-5 py-3 rounded-full border border-white/10 transition-colors"
+                    >
+                      <Phone size={16} />
+                      Call Directly
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* GitHub Card */}
+              <div className="relative group">
+                <div className="absolute -inset-px bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/30 group-hover:to-purple-500/30 rounded-3xl blur-sm transition-all duration-500 opacity-0 group-hover:opacity-100" />
+                <div className="relative h-full bg-[#111] border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all flex flex-col justify-between">
+                  <div>
+                    <div className="p-3 bg-white/5 rounded-2xl border border-white/10 w-fit text-gray-300 mb-6">
+                      <Github size={24} />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2">GitHub</h3>
+                    <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                      Check out all my open-source code, personal builds, and active repositories.
+                    </p>
+                  </div>
+
+                  <a
+                    href="https://github.com/whosh289-dotcom"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-between w-full p-3.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl text-sm font-medium text-white transition-colors"
+                  >
+                    <span>@whosh289-dotcom</span>
+                    <ExternalLink size={16} className="text-gray-400" />
+                  </a>
+                </div>
+              </div>
             </div>
           </motion.div>
         </section>
